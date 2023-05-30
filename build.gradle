@@ -9,12 +9,17 @@ android {
     compileSdk 32
 
     defaultConfig {
-        minSdk 21
+        minSdk 16
         targetSdk 32
         versionCode 1
-        versionName "1.0"
-
+        
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+
+        aarMetadata {
+            minCompileSdk = 16
+        }
     }
 
     buildTypes {
@@ -23,12 +28,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+
+    testOptions {
+        unitTests.returnDefaultValues = true
     }
-    kotlinOptions {
-        jvmTarget = '1.8'
+
+    testFixtures {
+        enable = true
     }
 }
 
