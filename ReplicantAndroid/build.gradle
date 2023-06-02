@@ -1,17 +1,18 @@
 plugins {
-    id 'com.android.library' version '7.3.1'
-    id 'org.jetbrains.kotlin.plugin.serialization' version '1.8.21'
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'org.jetbrains.kotlin.plugin.serialization'
     id 'maven-publish'
 }
 
 android {
+    compileSdkVersion 32
     namespace 'org.operatorfoundation.replicantandroid'
-    compileSdk 32
 
     defaultConfig {
-        minSdk 16
-        targetSdk 32
-        versionCode 1
+        minSdkVersion 16
+        targetSdkVersion 32
+        versionCode = 1
 
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
