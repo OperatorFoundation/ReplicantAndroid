@@ -5,9 +5,9 @@ import org.operatorfoundation.ghostwriterandroid.*
 import org.operatorfoundation.transmission.Connection
 
 @Serializable
-class StarburstConfig(val mode: StarburstMode) {
+class StarburstConfig(val mode: String) {
     fun perform(connection: Connection) {
-        if (mode != SMTPClient()) {
+        if (mode != "SMTPClient") {
             throw Exception("Error: Starburst does not support server mode on Android")
         }
 //        guard let firstClientListen = ListenTemplate(Template("220 $1 SMTP service ready\r\n"), patterns: [ExtractionPattern("^([a-zA-Z0-9.-]+)", .string)], maxSize: 253, maxTimeoutSeconds: Int.max) else {
@@ -101,13 +101,4 @@ class StarburstConfig(val mode: StarburstMode) {
 
 @Serializable
 class ListenTemplate(val template: Template, val patterns: Array<ExtractionPattern>, val maxSize: Int, val maxTimeoutSeconds: Int)
-
-@Serializable
-open class StarburstMode
-
-@Serializable
-class SMTPClient: StarburstMode()
-
-@Serializable
-class SMTPServer: StarburstMode()
 
