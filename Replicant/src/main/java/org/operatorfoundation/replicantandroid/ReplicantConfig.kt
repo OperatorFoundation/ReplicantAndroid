@@ -7,13 +7,13 @@ import org.operatorfoundation.transmission.TransmissionConnection
 import java.util.logging.Logger
 
 @Serializable
-class ReplicantConfig(val serverAddress: String, val polish: PolishConfig, val toneburst: StarburstConfig, val transport: String) {
+class ReplicantConfig(val serverAddress: String, val polish: PolishConfig, val toneBurst: Toneburst, val transport: String) {
     fun connect(logger: Logger?): Connection {
         val hostPort = serverAddress.split(":")
         val host = hostPort[0]
         val port = hostPort[1].toInt()
         val connection = TransmissionConnection(host, port, ConnectionType.TCP,null)
-        toneburst.perform(connection)
+        toneBurst.starburst.perform(connection)
         return polish.polish(connection, logger)
     }
 }
