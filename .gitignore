@@ -1,3 +1,5 @@
 /build
 .idea
 .gradle
+Replicant/src/test/java/android/util/Base64.java
+Replicant/src/test/java/android/util/Log.java

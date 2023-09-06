@@ -4,9 +4,9 @@ import kotlinx.serialization.Serializable
 import java.util.logging.Logger
 import android.util.Base64
 import org.operatorfoundation.keychainandroid.PublicKey
-import org.operatorfoundation.shadowkotlin.DarkStar
-import org.operatorfoundation.shadowkotlin.ShadowConfig
-import org.operatorfoundation.shadowkotlin.ShadowConnection
+import org.operatorfoundation.shadow.DarkStar
+import org.operatorfoundation.shadow.ShadowConfig
+import org.operatorfoundation.shadow.ShadowConnection
 import org.operatorfoundation.transmission.Connection
 
 @Serializable
@@ -16,9 +16,10 @@ class PolishConfig(val serverAddress: String, val serverPublicKey: PublicKey) {
         val host = hostPort[0]
         val port = hostPort[1].toInt()
         val keyBytes = serverPublicKey.data
+        println("keybytes to be put into shadow: $keyBytes")
         val keyString = Base64.encodeToString(keyBytes, Base64.DEFAULT)
         // FIXME: shadow config will eventually need to take a key not a string
-        val shadowConfig = ShadowConfig(keyString, "DARKSTAR", host, port)
+        val shadowConfig = ShadowConfig(keyString, "darkstar", host, port)
         return ShadowConnection(connection, shadowConfig, logger)
     }
 }

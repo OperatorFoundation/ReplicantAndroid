@@ -1,19 +1,18 @@
 package org.operatorfoundation.replicantandroid
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.operatorfoundation.ghostwriterandroid.*
-import org.operatorfoundation.transmission.Connection
+import org.operatorfoundation.transmission.*
 
-@Serializable
-class Toneburst(val starburst: StarburstConfig)
-
-@Serializable
-sealed class mode {
-    class SMTPClient: mode()
+sealed interface ToneBurst {
+    fun perform(connection: Connection)
 }
+
 @Serializable
-class StarburstConfig(val mode: mode) {
-    fun perform(connection: Connection) {
+@SerialName("starburst")
+class Starburst(var mode: String): ToneBurst {
+    override fun perform(connection: Connection) {
         val firstClientListen = ListenTemplate(Template("220 $1 SMTP service ready\r\n"), arrayOf(ExtractionPattern("^([a-zA-Z0-9.-]+)", Types.string)), 253, Int.MAX_VALUE)
         if (firstClientListen == null) {
             throw Exception("first listen failed")
@@ -26,6 +25,7 @@ class StarburstConfig(val mode: mode) {
             throw Exception("second listen failed")
         }
 
+        // FIXME: It's not liking this listen even though all of the correct things are going through wireshark
         listen(secondClientListen, connection)
         speak("STARTTLS\r\n", connection)
         val thirdClientListen = ListenTemplate(Template("$1\r\n"), arrayOf(ExtractionPattern("^(.+)\r\n", Types.string)), 253, 10)
@@ -48,7 +48,9 @@ class StarburstConfig(val mode: mode) {
             buffer += byte
             val string = buffer.decodeToString()
             val details = Parse(template.template, template.patterns, string)
-            return
+            if (details != null) {
+                return
+            }
         }
     }
 
