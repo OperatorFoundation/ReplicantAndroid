@@ -32,15 +32,15 @@ android {
 
 dependencies {
     implementation 'com.github.OperatorFoundation:GhostwriterAndroid:1.0.12'
-    implementation 'com.github.OperatorFoundation:TransmissionAndroid:1.2.8'
-    implementation 'com.github.OperatorFoundation:ShapeshifterAndroidKotlin:4.0.5'
-    implementation 'com.github.OperatorFoundation:KeychainAndroid:3.0.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0'
+    implementation 'com.github.OperatorFoundation:TransmissionAndroid:1.3.3'
+    implementation 'com.github.OperatorFoundation:ShapeshifterAndroidKotlin:5.0.4'
+    implementation 'com.github.OperatorFoundation:KeychainAndroid:5.0.4'
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0'
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'com.github.OperatorFoundation:KeychainAndroid:3.0.0'
+    testImplementation 'com.github.OperatorFoundation:KeychainAndroid:5.0.4'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }

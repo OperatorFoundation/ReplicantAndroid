@@ -1,5 +1,6 @@
 package org.operatorfoundation.replicantandroid
 
+import android.content.Context
 import kotlinx.serialization.Serializable
 import java.util.logging.Logger
 import android.util.Base64
@@ -11,7 +12,8 @@ import org.operatorfoundation.transmission.Connection
 
 @Serializable
 class PolishConfig(val serverAddress: String, val serverPublicKey: PublicKey) {
-    fun polish(connection: Connection, logger: Logger?): Connection {
+    fun polish(connection: Connection, context: Context, logger: Logger?): Connection
+    {
         val hostPort = serverAddress.split(":")
         val host = hostPort[0]
         val port = hostPort[1].toInt()
@@ -20,6 +22,6 @@ class PolishConfig(val serverAddress: String, val serverPublicKey: PublicKey) {
         val keyString = Base64.encodeToString(keyBytes, Base64.DEFAULT)
         // FIXME: shadow config will eventually need to take a key not a string
         val shadowConfig = ShadowConfig(keyString, "darkstar", host, port)
-        return ShadowConnection(connection, shadowConfig, logger)
+        return ShadowConnection(shadowConfig, context, logger, connection)
     }
 }
