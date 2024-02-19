@@ -5,7 +5,6 @@ import kotlinx.serialization.Serializable
 import java.util.logging.Logger
 import android.util.Base64
 import org.operatorfoundation.keychainandroid.PublicKey
-import org.operatorfoundation.shadow.DarkStar
 import org.operatorfoundation.shadow.ShadowConfig
 import org.operatorfoundation.shadow.ShadowConnection
 import org.operatorfoundation.transmission.Connection
