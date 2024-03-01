@@ -25,7 +25,6 @@ class Starburst(var mode: String): ToneBurst {
             throw Exception("second listen failed")
         }
 
-        // FIXME: It's not liking this listen even though all of the correct things are going through wireshark
         listen(secondClientListen, connection)
         speak("STARTTLS\r\n", connection)
         val thirdClientListen = ListenTemplate(Template("$1\r\n"), arrayOf(ExtractionPattern("^(.+)\r\n", Types.string)), 253, 10)
